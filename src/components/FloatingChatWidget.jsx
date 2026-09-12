@@ -23,7 +23,7 @@ function InstagramIcon({ className = 'w-4 h-4' }) {
   );
 }
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000/api';
+const BACKEND_URL = (import.meta.env.VITE_API_URL || `${(import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000').replace(/\/$/, '')}/api`).replace(/\/$/, '');
 
 const QUICK_FAQS = [
   {
