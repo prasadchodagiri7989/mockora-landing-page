@@ -14,6 +14,8 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const studentLoginUrl = `${(import.meta.env.VITE_USER_URL || 'http://localhost:5173').replace(/\/$/, '')}/login`;
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled ? 'glass-panel border-b border-slate-200/80 shadow-xs py-3.5' : 'bg-transparent py-5'
@@ -22,11 +24,11 @@ export default function Navbar() {
         {/* Brand Logo */}
         <Link to="/" className="flex items-center gap-2.5 group">
           <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-indigo-700 text-white flex items-center justify-center font-black text-lg shadow-md shadow-indigo-600/30 group-hover:scale-105 transition">
-            U
+            M
           </div>
           <div>
             <span className="font-extrabold text-base sm:text-lg tracking-tight text-slate-950 block leading-tight">
-              Universal Mock Test
+              MockOra
             </span>
             <span className="text-[10px] font-bold text-emerald-600 tracking-wider uppercase block">
               All-Exam Pass • ₹999
@@ -42,7 +44,7 @@ export default function Navbar() {
           <a href="#reviews" className="hover:text-indigo-600 transition">Reviews</a>
           <a href="#faq" className="hover:text-indigo-600 transition">FAQ</a>
           <a 
-            href="http://localhost:5173/login" 
+            href={studentLoginUrl} 
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-1 text-slate-500 hover:text-slate-900 transition"
@@ -113,7 +115,7 @@ export default function Navbar() {
             FAQ
           </a>
           <a 
-            href="http://localhost:5173/login" 
+            href={studentLoginUrl} 
             target="_blank" 
             rel="noopener noreferrer"
             className="block text-xs font-bold text-slate-500 py-1.5"

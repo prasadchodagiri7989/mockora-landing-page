@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Landing from './pages/Landing';
 import RegisterAndPay from './pages/RegisterAndPay';
 import PaymentStatus from './pages/PaymentStatus';
+import FloatingChatWidget from './components/FloatingChatWidget';
 
 export default function App() {
   return (
@@ -13,6 +14,8 @@ export default function App() {
         <Route path="/checkout" element={<Navigate to="/register" replace />} />
         <Route path="/payment/status" element={<PaymentStatus />} />
       </Routes>
+      <FloatingChatWidget />
     </BrowserRouter>
   );
 }
+

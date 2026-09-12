@@ -67,7 +67,8 @@ export default function PaymentStatus() {
     checkStatus();
   }, [orderId]);
 
-  const studentLoginUrl = 'http://localhost:5173/login';
+  const userBaseUrl = import.meta.env.VITE_USER_URL || 'http://localhost:5173';
+  const studentLoginUrl = `${userBaseUrl.replace(/\/$/, '')}/login`;
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-between py-12 px-4 sm:px-6 lg:px-8">
