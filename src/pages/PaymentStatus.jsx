@@ -76,12 +76,7 @@ export default function PaymentStatus() {
         {/* Brand Header */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-black text-lg shadow-md shadow-indigo-600/30">
-              U
-            </div>
-            <span className="font-black text-xl tracking-tight text-slate-900">
-              Universal Mock Test
-            </span>
+            <img src="/mockora-logo.png" alt="MockOra" className="h-10 sm:h-11 w-auto object-contain" />
           </Link>
         </div>
 
@@ -126,7 +121,7 @@ export default function PaymentStatus() {
                   Payment Successful
                 </span>
                 <h2 className="text-2xl font-black text-slate-950 mt-2">
-                  Welcome to Universal Mock Test!
+                  Welcome to MockOra!
                 </h2>
                 <p className="text-xs text-slate-600 mt-1">
                   Your 1-Year All-Access Pass is now active.
@@ -190,7 +185,7 @@ export default function PaymentStatus() {
                   to="/"
                   className="block text-xs font-semibold text-slate-400 hover:text-slate-600 transition pt-2"
                 >
-                  &larr; Back to Universal Mock Test Landing Page
+                  &larr; Back to MockOra Landing Page
                 </Link>
               </div>
             </div>
@@ -228,7 +223,7 @@ export default function PaymentStatus() {
       </div>
 
       <div className="text-center text-[11px] text-slate-400 mt-8">
-        Need assistance with your enrollment? Contact <strong>support@universalmock.com</strong>
+        Need assistance with your enrollment? Contact <strong>neuvexa.services@gmail.com</strong>
       </div>
     </div>
   );

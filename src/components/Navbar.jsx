@@ -22,18 +22,15 @@ export default function Navbar() {
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Logo */}
-        <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-indigo-700 text-white flex items-center justify-center font-black text-lg shadow-md shadow-indigo-600/30 group-hover:scale-105 transition">
-            M
-          </div>
-          <div>
-            <span className="font-extrabold text-base sm:text-lg tracking-tight text-slate-950 block leading-tight">
-              MockOra
-            </span>
-            <span className="text-[10px] font-bold text-emerald-600 tracking-wider uppercase block">
-              All-Exam Pass • ₹999
-            </span>
-          </div>
+        <Link to="/" className="flex items-center gap-3 group">
+          <img 
+            src="/mockora-logo.png" 
+            alt="MockOra" 
+            className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105" 
+          />
+          <span className="hidden sm:inline-block text-[10px] font-bold text-emerald-600 tracking-wider uppercase bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+            Pass • ₹999
+          </span>
         </Link>
 
         {/* Desktop Links */}

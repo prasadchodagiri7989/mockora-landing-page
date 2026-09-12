@@ -20,12 +20,9 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-4 md:col-span-2">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-sm">
-                M
+              <div className="p-2 bg-white/10 rounded-2xl border border-white/10 inline-block backdrop-blur-xs">
+                <img src="/mockora-logo.png" alt="MockOra" className="h-7 w-auto object-contain brightness-125" />
               </div>
-              <span className="font-extrabold text-base tracking-tight text-white">
-                MockOra
-              </span>
             </div>
             <p className="text-xs text-slate-500 max-w-sm leading-relaxed">
               India's premier all-exam test simulator and preparation ecosystem. Designed to give every engineering, medical, civil services, and language candidate a winning edge.
