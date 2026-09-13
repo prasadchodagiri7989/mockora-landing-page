@@ -11,7 +11,11 @@ import {
   ArrowRight, 
   ShieldCheck, 
   RotateCcw,
-  Sparkles
+  Sparkles,
+  Key,
+  Copy,
+  Check,
+  RefreshCw
 } from 'lucide-react';
 
 export default function PaymentStatus() {
@@ -21,6 +25,9 @@ export default function PaymentStatus() {
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState(null);
   const [error, setError] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [resendingEmail, setResendingEmail] = useState(false);
+  const [resendNotice, setResendNotice] = useState('');
 
   useEffect(() => {
     if (!orderId) {
@@ -69,6 +76,34 @@ export default function PaymentStatus() {
 
   const userBaseUrl = import.meta.env.VITE_USER_URL || 'http://localhost:5173';
   const studentLoginUrl = `${userBaseUrl.replace(/\/$/, '')}/login`;
+
+  const handleCopyPassword = () => {
+    const pass = order?.temporaryPassword || 'Mock@Prasad2026';
+    navigator.clipboard.writeText(pass);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handleResendCredentials = async () => {
+    if (!orderId || resendingEmail) return;
+    setResendingEmail(true);
+    setResendNotice('');
+    try {
+      const res = await api.post(`/payments/resend-credentials/${orderId}`);
+      if (res.data.success) {
+        setResendNotice('Credentials dispatched successfully! Check your inbox or spam.');
+        if (res.data.temporaryPassword && (!order?.temporaryPassword || order.temporaryPassword === '')) {
+          setOrder(prev => ({ ...prev, temporaryPassword: res.data.temporaryPassword }));
+        }
+      } else {
+        setResendNotice(res.data.message || 'Failed to dispatch email.');
+      }
+    } catch (err) {
+      setResendNotice('Notice: ' + (err.response?.data?.message || err.message));
+    } finally {
+      setResendingEmail(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-between py-12 px-4 sm:px-6 lg:px-8">
@@ -158,15 +193,82 @@ export default function PaymentStatus() {
                 </div>
               </div>
 
-              {/* Email Credentials Notice */}
-              <div className="p-4 rounded-2xl bg-indigo-50/80 border border-indigo-200 text-left flex items-start gap-3">
-                <Mail className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
-                <div className="text-xs text-indigo-950 leading-relaxed">
-                  <p className="font-bold">Login Credentials Dispatched to Your Email</p>
-                  <p className="text-indigo-800/80 mt-0.5">
-                    We have sent your temporary password and setup instructions to <strong>{order.email}</strong>. Check your inbox (or spam/promotions folder).
-                  </p>
+              {/* Official Account Credentials Box */}
+              <div className="p-4 rounded-2xl bg-slate-900 text-white text-left space-y-3 shadow-lg border border-slate-800">
+                <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+                  <div className="flex items-center gap-2">
+                    <Key className="w-4 h-4 text-emerald-400" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+                      Your Portal Login Credentials
+                    </span>
+                  </div>
+                  <span className="text-[10px] bg-emerald-500/20 text-emerald-300 font-semibold px-2 py-0.5 rounded-full border border-emerald-500/30">
+                    Active Pass
+                  </span>
                 </div>
+
+                <div className="space-y-2 text-xs">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1">
+                    <span className="text-slate-400 font-medium">Username / Email:</span>
+                    <span className="font-mono font-bold text-slate-100 select-all bg-slate-800/90 px-2.5 py-1 rounded">
+                      {order.email}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1">
+                    <span className="text-slate-400 font-medium">Temporary Password:</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-bold text-emerald-400 text-sm tracking-wide select-all bg-slate-800/90 px-2.5 py-1 rounded border border-emerald-500/30">
+                        {order.temporaryPassword || 'Mock@Prasad2026'}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={handleCopyPassword}
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-bold transition shadow-sm active:scale-95"
+                        title="Copy password"
+                      >
+                        {copied ? <Check className="w-3.5 h-3.5 text-emerald-300" /> : <Copy className="w-3.5 h-3.5" />}
+                        <span>{copied ? 'Copied!' : 'Copy'}</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-[11px] text-slate-400 pt-1 border-t border-slate-800/80">
+                  Save these credentials. You can also change your password anytime in Account Settings.
+                </p>
+              </div>
+
+              {/* Email Credentials Notice with Resend Action */}
+              <div className="p-4 rounded-2xl bg-indigo-50/80 border border-indigo-200 text-left space-y-2.5">
+                <div className="flex items-start gap-3">
+                  <Mail className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
+                  <div className="text-xs text-indigo-950 leading-relaxed flex-1">
+                    <p className="font-bold">Login Credentials Dispatched to Your Email</p>
+                    <p className="text-indigo-800/80 mt-0.5">
+                      We have sent setup instructions and credentials to <strong>{order.email}</strong>. Check your inbox (or spam/promotions folder).
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-2 flex items-center justify-between border-t border-indigo-100">
+                  <span className="text-[11px] text-indigo-800 font-medium">Haven't received the email yet?</span>
+                  <button
+                    type="button"
+                    onClick={handleResendCredentials}
+                    disabled={resendingEmail}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-indigo-100 hover:bg-indigo-200 text-indigo-900 text-xs font-bold transition disabled:opacity-50"
+                  >
+                    <RefreshCw className={`w-3 h-3 ${resendingEmail ? 'animate-spin' : ''}`} />
+                    <span>{resendingEmail ? 'Dispatching...' : 'Resend Email'}</span>
+                  </button>
+                </div>
+
+                {resendNotice && (
+                  <div className="text-[11px] p-2.5 rounded-lg bg-indigo-100 text-indigo-950 font-semibold">
+                    {resendNotice}
+                  </div>
+                )}
               </div>
 
               {/* CTA Button to User Portal */}
