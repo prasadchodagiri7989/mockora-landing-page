@@ -175,8 +175,9 @@ export default function RegisterAndPay() {
           return;
         }
 
+        const paymentMode = (res.data.environment || import.meta.env.VITE_CASHFREE_ENV || 'sandbox').toLowerCase() === 'production' ? 'production' : 'sandbox';
         const cashfree = window.Cashfree({
-          mode: 'sandbox',
+          mode: paymentMode,
         });
 
         cashfree.checkout({

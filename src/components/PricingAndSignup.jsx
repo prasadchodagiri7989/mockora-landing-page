@@ -154,8 +154,9 @@ export default function PricingAndSignup({ preselectedCategory }) {
 
         // Trigger Cashfree Drop-in Checkout Modal
         if (window.Cashfree) {
+          const paymentMode = (res.data.environment || import.meta.env.VITE_CASHFREE_ENV || 'sandbox').toLowerCase() === 'production' ? 'production' : 'sandbox';
           const cashfree = window.Cashfree({
-            mode: 'sandbox', // sandbox or production
+            mode: paymentMode,
           });
 
           cashfree.checkout({
