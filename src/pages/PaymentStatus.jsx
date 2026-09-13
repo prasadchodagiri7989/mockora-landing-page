@@ -41,7 +41,7 @@ export default function PaymentStatus() {
 
     const checkStatus = async () => {
       try {
-        const res = await api.get(`/payments/status/${orderId}?simulate=true`);
+        const res = await api.get(`/payments/status/${orderId}`);
         if (res.data.success) {
           setOrder(res.data.order);
 
