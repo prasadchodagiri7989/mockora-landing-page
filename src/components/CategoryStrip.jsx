@@ -9,7 +9,8 @@ import {
   BookOpen, 
   GraduationCap, 
   Activity,
-  ArrowUpRight 
+  ArrowUpRight,
+  Globe
 } from 'lucide-react';
 
 const CATEGORIES = [
@@ -50,13 +51,13 @@ const CATEGORIES = [
     desc: 'Timed Reading Comprehension, Listening Passages, and Academic Vocabulary.',
   },
   {
-    name: 'D-MAT Dental Aptitude',
-    icon: Activity,
-    color: '#DC2626',
-    tag: 'Clinical Specialization',
+    name: 'DMAT for Germany',
+    icon: Globe,
+    color: '#0284C7',
+    tag: 'Study in Germany',
     tests: '25+ Tests',
     questions: '2,200+ Questions',
-    desc: 'Dental Anatomy, Oral Pathology, Pharmacology, and Diagnostic Radiology.',
+    desc: 'Mathematical Equations, Figure Sequences, Text Reasoning, and Cognitive Aptitude for German University Admissions.',
   },
   {
     name: 'NIT & Engineering Entrance',

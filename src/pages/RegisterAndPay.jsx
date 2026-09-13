@@ -19,11 +19,12 @@ import {
 } from 'lucide-react';
 
 const FALLBACK_CATEGORIES = [
+  'dMAT General Academic',
+  'DMAT for Germany',
   'Computer Science & GATE',
   'Medical NEET',
   'IIT-JEE Main & Advanced',
   'IELTS English Mastery',
-  'D-MAT Dental Aptitude',
   'NIT & Engineering Entrance',
   'Management CAT & GMAT',
   'UPSC Civil Services CSAT'

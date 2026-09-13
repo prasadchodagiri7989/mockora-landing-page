@@ -8,7 +8,7 @@ const FAQS = [
   },
   {
     q: 'Can I access mock tests and practice sets from multiple categories?',
-    a: 'Yes! Your ₹999 pass is universal. While you pick a primary stream during signup for tailored dashboard recommendations, you have unrestricted access to all examination streams (GATE CS, NEET, IIT-JEE, IELTS, D-MAT, etc.) throughout your 365-day pass.',
+    a: 'Yes! Your ₹999 pass is universal. While you pick a primary stream during signup for tailored dashboard recommendations, you have unrestricted access to all examination streams (GATE CS, NEET, IIT-JEE, IELTS, dMAT Germany, etc.) throughout your 365-day pass.',
   },
   {
     q: 'How are my login credentials delivered?',
